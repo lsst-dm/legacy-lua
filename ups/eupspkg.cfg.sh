@@ -16,7 +16,7 @@ config()
 	esac
 
 	# Work around Darwin vs. GNU sed differences
-	[[ $(uname) = Darwin ]] && SED_INPLACE="sed -i '.prev'" || SED_INPLACE="sed -i"
+	[[ $(uname) = Darwin ]] && SED_INPLACE="/usr/bin/sed -i '.prev'" || SED_INPLACE="sed -i"
 
 	$SED_INPLACE "s/PLAT= none/PLAT= ${PLAT}/" Makefile &&
 	$SED_INPLACE "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${PREFIX}," Makefile &&
