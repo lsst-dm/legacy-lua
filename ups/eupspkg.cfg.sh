@@ -1,4 +1,5 @@
 # EupsPkg config file. Sourced by 'eupspkg'
+# shellcheck shell=bash
 
 # Breaks on Darwin w/o this
 export LANG=C
@@ -22,5 +23,6 @@ config()
 	$SED_INPLACE "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${PREFIX}," Makefile &&
 	$SED_INPLACE "s,CFLAGS= -O2,CFLAGS= -I${PREFIX}/include -fPIC -O2," src/Makefile &&
 	$SED_INPLACE "s,LIBS= -lm,LIBS= -L${PREFIX}/lib -lm," src/Makefile &&
-	$SED_INPLACE "s,#define LUA_ROOT\t\"/usr/local/\",#define LUA_ROOT\t\"${PREFIX}/\"," src/luaconf.h
+	$SED_INPLACE "s,#define LUA_ROOT\t\"/usr/local/\",#define LUA_ROOT\t\"${PREFIX}/\"," src/luaconf.h &&
+	$SED_INPLACE 's/^CC.*/CC?=gcc/' src/Makefile etc/Makefile
 }
