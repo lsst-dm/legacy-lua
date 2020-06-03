@@ -21,8 +21,8 @@ config()
 
 	$SED_INPLACE "s/PLAT= none/PLAT= ${PLAT}/" Makefile &&
 	$SED_INPLACE "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${PREFIX}," Makefile &&
-	$SED_INPLACE "s,CFLAGS= -O2,CFLAGS= -I${PREFIX}/include -fPIC -O2," src/Makefile &&
-	$SED_INPLACE "s,LIBS= -lm,LIBS= -L${PREFIX}/lib -lm," src/Makefile &&
+	$SED_INPLACE "s,CFLAGS= -O2,CFLAGS= -I${PREFIX}/include -I${CONDA_PREFIX}/include -fPIC -O2," src/Makefile &&
+	$SED_INPLACE "s,LIBS= -lm,LIBS= -L${PREFIX}/lib -L${CONDA_PREFIX}/lib -lm," src/Makefile &&
 	$SED_INPLACE "s,#define LUA_ROOT\t\"/usr/local/\",#define LUA_ROOT\t\"${PREFIX}/\"," src/luaconf.h &&
 	$SED_INPLACE 's/^CC.*/CC?=gcc/' src/Makefile
 }
